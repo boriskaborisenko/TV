@@ -1,0 +1,7 @@
+#!/bin/bash 
+
+open -a "Google Chrome" /Users/boriskaborisenko/Desktop/TV/index.html 
+cd /Users/boriskaborisenko/Desktop/TV
+nodemon server.js
+
+
