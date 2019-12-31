@@ -1,0 +1,219 @@
+<script>
+const token = 'bk4pj621lteg8rnv6ppf5j16d3'
+</script>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TV</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400,500,700,800&display=swap" rel="stylesheet">
+    <style>
+        html, body{
+            margin:0;
+            padding:0;
+            background:#fafbfc;
+            font-family: 'Raleway';
+            font-weight: 800;
+        }
+        .all{
+            width:80%;
+            margin:0 auto;
+            max-width: 320px;
+        }
+        #stop{
+            cursor: pointer;
+            margin:40px 0;
+            border-radius: 10px;
+            background:#232323;
+            text-transform: uppercase;
+            display:inline-block;
+            box-sizing: border-box;
+            padding:8px 20px;
+            color:#fff;
+        }
+        ul{
+            margin:0 0 100px 0;
+            padding:0;
+            box-shadow: 0 0 30px rgba(0,0,0,0.23);
+            border-radius: 10px;
+        }
+        .turnme{
+            background:#fff;
+            list-style: none;
+            font-weight: 600;
+            line-height: 36px;
+            color:rgba(0,0,0,0.77);
+            border-top:1px solid rgba(0,0,0,0.1);
+            padding:7px 20px;
+            cursor:pointer;
+        }
+        .turnme:first-child{
+            border-radius: 10px 10px 0 0;
+            border:none;
+        }
+        .turnme:last-child{
+            border-radius: 0 0 10px 10px;
+        }
+
+        .logo{
+            width:36px;
+            height: 36px;
+            background-color:#eee;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="all">
+        <div id="stop">stop</div>
+        <div>
+            <ul id="channels"></ul>
+        </div>
+    </div>
+    <script>
+    
+    const channels = [
+        {
+            cat:'Music',
+            name:'M1',
+            id:11
+        },
+        {
+            cat: 'Music',
+            name: 'MTV',
+            id: 366
+        },
+        {
+            cat: 'Music',
+            name: 'VH1 Classic',
+            id: 221
+        },
+        {
+            cat: 'Music',
+            name: 'Nashe music',
+            id: 410
+        },
+        {
+            cat: 'Music',
+            name: 'Music box',
+            id: 114
+        },
+        ///////
+        {
+            cat: 'Sport',
+            name: 'Football 1',
+            id: 104
+        },
+        {
+            cat: 'Sport',
+            name: 'Football 2',
+            id: 105
+        },
+        {
+            cat: 'Sport',
+            name: 'Eurosport',
+            id: 89
+        },
+        {
+            cat: 'Sport',
+            name: 'Xsport',
+            id: 385
+        },
+        //////
+        {
+            cat: 'Science',
+            name: 'Animal Planet',
+            id: 51
+        },
+        {
+            cat: 'Science',
+            name: 'Discovery',
+            id: 50
+        },
+        {
+            cat: 'Science',
+            name: 'Nat Geo Wild',
+            id: 77
+        },
+        {
+            cat: 'Science',
+            name: 'National Geographic',
+            id: 75
+        },
+        {
+            cat: 'Science',
+            name: 'English Club',
+            id: 94
+        },
+        {
+            cat: 'Science',
+            name: 'TVP Polonia',
+            id: 372
+        },
+        {
+            cat: 'Mix',
+            name: 'Pryamiy',
+            id: 8
+        },
+        {
+            cat: 'Mix',
+            name: 'Mega',
+            id: 69
+        },
+        
+    ]
+
+
+    channels.map(c=>{
+        let bg = '#fff'
+        if(c.cat === 'Music'){
+            bg = 'rgba(200,130,58,0.1)'
+        }
+        if(c.cat === 'Science'){
+            bg = 'rgba(0,13,58,0.1)'
+        }
+        if(c.cat === 'Sport'){
+            bg = 'rgba(178,13,58,0.1)'
+        }
+        if(c.cat === 'Mix'){
+            bg = 'rgba(211, 143, 115, 1)'
+        }
+        document.querySelector('#channels').innerHTML += `<li class="turnme" style="background:${bg};" id="${c.id}">${c.name}</li>`
+    })
+
+    const server = 'http://localhost:3333'
+    //const server = 'http://905639f3.ngrok.io'
+
+    const playChannel = (num) => {
+        fetch(server+'/ch/'+num+'/token/'+token)
+        .then(response => response.json())
+        .then(data=>console.log(data))
+    }
+
+    
+    document.querySelector('#stop').addEventListener('click',()=>{
+        fetch(server+'/quit')
+        .then(response => response.json())
+        .then(data=>console.log(data))
+    }, false)
+        
+    
+
+    const all = [...document.querySelectorAll('.turnme')]
+    all.forEach(c=>{
+        c.addEventListener('click',()=>{
+            playChannel(c.id)
+        }, false)
+    })
+    
+    </script>
+
+    
+</body>
+</html>

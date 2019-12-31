@@ -1,0 +1,24 @@
+{
+  "name": "TV",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "cvlc": "^0.1.0",
+    "exec-sh": "^0.3.2",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "node-cmd": "^3.0.0",
+    "request": "^2.88.0",
+    "requestify": "^0.2.5",
+    "shell-exec": "^1.0.2"
+  }
+}
